@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="Hello %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <DaDaPush name="DaDaPush"
+      basePath="https://www.dadapush.com"
+      channelToken="YOUR_CHANNEL_TOKEN"
+      failOnError="false"
+      title="[%-5level] %logger{36}"
+    >
+      <PatternLayout
+        pattern="Time: %d{YYYY-MM-dd HH:mm:ss.SSS}\nLevel: %-5level\nLoggerName: %logger{36}\nMessage: %msg%n"/>
+    </DaDaPush>
+    <Async name="DaDaPush_Async">
+      <AppenderRef ref="DaDaPush"/>
+    </Async>
+  </Appenders>
+  <Loggers>
+    <Root level="info">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="DaDaPush" level="error"/>
+      <!--<AppenderRef ref="DaDaPush_Async" level="error"/>-->
+    </Root>
+  </Loggers>
+</Configuration>
