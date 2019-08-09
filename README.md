@@ -7,7 +7,7 @@ add dependency
 <dependency>
   <groupId>com.dadapush.client</groupId>
   <artifactId>dadapush-log4j2-appender</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
