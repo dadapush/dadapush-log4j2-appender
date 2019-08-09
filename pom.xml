@@ -6,7 +6,7 @@
 
   <groupId>com.dadapush.client</groupId>
   <artifactId>dadapush-log4j2-appender</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
   <name>Log4j2 DaDaPush Notification Appender</name>
   <description>log4j2 appender for sending messages to DaDaPush channel</description>

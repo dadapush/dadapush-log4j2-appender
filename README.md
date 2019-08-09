@@ -18,7 +18,6 @@ define appender
       <DaDaPush name="DaDaPush"
         basePath="https://www.dadapush.com"
         channelToken="YOUR_CHANNEL_TOKEN"
-        failOnError="false"
         title="[%-5level] %logger{36}"
       >
         <PatternLayout

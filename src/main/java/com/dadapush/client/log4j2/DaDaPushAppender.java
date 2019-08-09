@@ -28,14 +28,12 @@ public class DaDaPushAppender extends AbstractAppender {
 
   private DaDaPushMessageApi apiInstance;
   private String channelToken;
-  private Boolean failOnError;
   private Layout<? extends Serializable> titleLayout;
   private Layout<? extends Serializable> contentLayout;
 
   public DaDaPushAppender(String name, Filter filter,
       String basePath,
       String channelToken,
-      Boolean failOnError,
       Layout<? extends Serializable> titleLayout,
       Layout<? extends Serializable> contentLayout
   ) {
@@ -43,7 +41,6 @@ public class DaDaPushAppender extends AbstractAppender {
     this.titleLayout = titleLayout;
     this.contentLayout = contentLayout;
     this.channelToken = channelToken;
-    this.failOnError = failOnError;
     ApiClient apiClient = Configuration.getDefaultApiClient();
     apiClient.setBasePath(basePath);
     apiInstance = new DaDaPushMessageApi(apiClient);
@@ -54,7 +51,6 @@ public class DaDaPushAppender extends AbstractAppender {
       @PluginAttribute("name") String name,
       @PluginAttribute("basePath") String basePath,
       @PluginAttribute("channelToken") String channelToken,
-      @PluginAttribute("failOnError") Boolean failOnError,
       @PluginAttribute("title") String title,
       @PluginElement("Layout") Layout<? extends Serializable> contentLayout,
       @PluginElement("Filters") Filter filter) {
@@ -73,10 +69,7 @@ public class DaDaPushAppender extends AbstractAppender {
     if (basePath == null) {
       basePath = "https://www.dadapush.com";
     }
-    if (failOnError == null) {
-      failOnError = false;
-    }
-    instance = new DaDaPushAppender(name, filter, basePath, channelToken, failOnError, titleLayout,
+    instance = new DaDaPushAppender(name, filter, basePath, channelToken, titleLayout,
         contentLayout);
     return instance;
   }
@@ -108,11 +101,7 @@ public class DaDaPushAppender extends AbstractAppender {
               "send notification fail, detail: " + result.getCode() + " " + result.getErrmsg());
         }
       } catch (ApiException e) {
-        if (!failOnError) {
-          getStatusLogger().error("send notification fail", e);
-        } else {
-          getStatusLogger().error("send notification fail", e);
-        }
+        getStatusLogger().error("send notification fail", e);
       }
     } catch (Exception e) {
       getStatusLogger().error("send notification fail, iLoggingEvent=" + logEvent, e);
